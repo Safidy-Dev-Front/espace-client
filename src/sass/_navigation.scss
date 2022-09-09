@@ -1,0 +1,16 @@
+.app-navigation__main ul{
+    padding-left: 0;
+    li{
+        display: inline-block;
+    }
+    button{
+        border: none;
+        background-color: $Cornsilk;
+        transition: 0.3s;
+        cursor: pointer;
+        font-size: 14px;
+        &.active, &:hover{
+            background-color: $Yellow;
+        }
+    }
+}

@@ -1,0 +1,26 @@
+.project-list__flex .row{
+   margin-left: calc(var(--bs-gutter-x) * -0.5);
+   margin-right: 0;
+}
+.project-list__flex .project__container{
+    background-color: #fff;
+    padding: 20px;
+}
+.project-list__flex .project-item{
+    margin-bottom: 20px;
+    cursor: pointer;
+    border: solid 1px transparent;
+    h2{
+        font-size: 1.5rem;
+    }
+    &:hover{
+        border-color: $Yellow;
+    }
+}
+.add-project{
+    position: fixed;
+    left: auto;
+    right: 30px;
+    bottom: 30px;
+    top: auto;
+}

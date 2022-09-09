@@ -1,0 +1,14 @@
+@import '~bootstrap';
+@import './variable';
+@import './buttons';
+@import './navigation';
+//Pages===============
+@import './pages/home';
+//Components==========
+@import './components/buttons';
+@import './components/add-new-project';
+@import './components/fields';
+@import './components/forms';
+body{
+background: #f0f0f1;
+}
