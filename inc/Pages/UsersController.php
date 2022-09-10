@@ -5,8 +5,6 @@ namespace Inc\Pages;
 use DateTime;
 use Inc\Api\SettingsApi;
 use Inc\Base\BaseController;
-use Inc\Api\Callbacks\AdminCallbacks;
-use Inc\Api\Callbacks\ManagerCallbacks;
 use \WP_REST_Request;
 use \WP_User;
 // use \stdClass;
