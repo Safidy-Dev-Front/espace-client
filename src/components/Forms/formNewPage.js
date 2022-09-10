@@ -1,4 +1,5 @@
 import React from "react";
+import SelectUser from "../Customs/SelectUser";
 import Classic from "../Fields/classic";
 import Textarea from "../Fields/textarea";
 const FormNewPage = ()=>{
@@ -25,6 +26,9 @@ const FormNewPage = ()=>{
                 label="Descriptions"
                 functionOnChange={handleChangeDescription}
                 />
+            </div>
+            <div>
+                <SelectUser/>
             </div>
         </form>
     )

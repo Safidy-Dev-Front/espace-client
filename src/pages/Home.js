@@ -13,6 +13,10 @@ const Home = () => {
         e.preventDefault();
         setClassNewProject('container_add-new-project isShow')
     }
+    const closeAddProject = (e)=>{
+        e.preventDefault();
+        setClassNewProject('container_add-new-project')
+    }
     useEffect(() => {
         axios.get(`${BASE_URL}/wp-json/project/v1/projects`)
             .then((response) => {
@@ -39,7 +43,9 @@ const Home = () => {
                         }
                     </div>
                 </div>
-                <AddNewProject classNewProject={classNewProject}/>
+                <AddNewProject 
+                classNewProject={classNewProject} 
+                dismissFunction={closeAddProject}/>
                 <AddProject handleFunction={handleShowAddProject}/>
             </div>
         </div>
