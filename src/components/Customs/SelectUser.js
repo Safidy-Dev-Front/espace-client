@@ -12,8 +12,16 @@ const SelectUser = ()=>{
     }, []);
     console.log('users ==>',users);
     return(
-        <div>
-            <ul></ul>
+        <div className="container__select-client">
+            <ul>
+                {
+                 users.map((user, index)=>{
+                    {
+                        return <li key={index}>{user.name}</li>
+                     } 
+                 })  
+                }
+            </ul>
         </div>
     )
 }
