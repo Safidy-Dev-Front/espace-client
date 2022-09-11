@@ -16,3 +16,21 @@
         right: 0%;
     }
 }
+.select-client__wrapper{
+    padding-left: 0;
+}
+.select-client__name-job{
+    padding-left: 15px;
+}
+.select-client__item{
+    p{
+        margin-bottom: 0;
+    }
+}
+.select-client__image img{
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 50%;
+}

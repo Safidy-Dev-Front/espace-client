@@ -18,8 +18,6 @@ class Api extends BaseController
     public $callbacks;
     public $argsPostTypes = array();
     public $pages = array();
-
-
     public function register()
     {
         $this->settings = new SettingsApi();
@@ -41,13 +39,13 @@ class Api extends BaseController
 
     public function AddArgPostType()
     {
-        $labels = array(
+        $labels_support = array(
             'name' => 'Supports',
             'singular_name' => 'Support'
         );
 
-        $args = array(
-            'labels' => $labels,
+        $args_support = array(
+            'labels' => $labels_support,
             'public' => true,
             'has_archive' => false,
             'menu_icon' => 'dashicons-download',
@@ -58,7 +56,27 @@ class Api extends BaseController
             'supports'            => array('title', 'editor', 'excerpt', 'author', 'custom-fields',),
             'rewrite' => array('slug' => 'supports'),
         );
-        register_post_type('support', $args);
+        register_post_type('support', $args_support);
+
+        $labels_company = array(
+            'name' => 'Enptreprise',
+            'singular_name' => 'Enptreprise'
+        );
+
+        $args_company = array(
+            'labels' => $labels_company,
+            'public' => true,
+            'has_archive' => false,
+            'menu_icon' => 'dashicons-building',
+            'exclude_from_search' => true,
+            'publicly_queryable' => false,
+            'hierarchical' => false,
+            'show_in_rest' => true,
+            'supports'            => array('title', 'editor', 'excerpt', 'author', 'custom-fields',),
+            'rewrite' => array('slug' => 'company'),
+        );
+        register_post_type('company', $args_company);
+
     }
     public function setPages()
     {

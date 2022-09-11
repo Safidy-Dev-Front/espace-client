@@ -10758,6 +10758,10 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.select-client__company {
+  font-size: 12px;
+}
+
 .btn-tooltip {
   padding: 15px 25px;
   border-radius: 0;
@@ -10843,6 +10847,26 @@ textarea.form-control-lg {
 }
 .container_add-new-project.isShow {
   right: 0%;
+}
+
+.select-client__wrapper {
+  padding-left: 0;
+}
+
+.select-client__name-job {
+  padding-left: 15px;
+}
+
+.select-client__item p {
+  margin-bottom: 0;
+}
+
+.select-client__image img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 50%;
 }
 
 .input-classic label {

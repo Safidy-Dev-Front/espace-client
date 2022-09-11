@@ -8,10 +8,6 @@ use Inc\Base\BaseController;
 use \WP_REST_Request;
 use \WP_User;
 // use \stdClass;
-
-/**
- * 
- */
 class UsersController extends BaseController
 {   
     public $idAtt;
@@ -70,19 +66,21 @@ class UsersController extends BaseController
      */
     public function getAllsUsers(WP_REST_Request $request)
     {
-
         global $wpdb;
         $usersArray = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "users");
          foreach($usersArray as $user){
             $id_user = $user->ID;
             $url_avatar = $this->getAttachment($id_user);
+            $company_object = get_field('company_of_user', 'user_'.$user->ID);
+            $company = $company_object->post_title;
             $user_array = [
                 'ID'=>$user->ID,
                 'user_login'=>$user->user_login,
                 'user_email'=>$user->user_email,
                 'user_registered'=>$user->user_registered,
                 'display_name'=>$user->display_name,
-                'image'=> $url_avatar
+                'image'=> $url_avatar,
+                'company'=> $company
             ];
             array_push($this->users, $user_array);
         }
