@@ -11,15 +11,19 @@ const SelectUser = ()=>{
                 setUsers(response.data)
             }).catch((error) => console.error(`Error:${error}`))
     }, []);
-    const onSelectClient = (idClient) =>{
-        let clientSelected = users.find( client => client.ID === idClient)
-        console.log(clientSelected); 
+    const onSelectClient = (e) =>{
+        const user_selected = users.find((u)=>u.ID === e.target.getAttribute('value')) 
+        setUsersSelected(user_selected);
     }
     return(
         <div className="container__select-client">
             <div className="select-client__selected">
                 {
-                    usersSelected.display_name ?  
+                    usersSelected.display_name ? 
+                    <div className="client_selected_item d-flex align-items-center">
+                         <div className="client_selected_image">
+                            <img src={usersSelected.image}/>
+                         </div>
                         <div className="select-client__name-job">
                             <p className="select-client__name">
                                 {usersSelected.display_name}
@@ -28,8 +32,9 @@ const SelectUser = ()=>{
                                 {usersSelected.company}
                             </p>
                         </div>
+                    </div>
                     :
-                    <div className="select-client__name-job">
+                    <div className="select-client__text">
                         <p>Sélectioné un client</p>
                     </div>
                 }
@@ -37,22 +42,20 @@ const SelectUser = ()=>{
             <ul className="select-client__wrapper">
                 {
                  users.map((user, index)=>{
-                        return <li key={index} >
-                            <button onClick={onSelectClient}>
-                                <div className="d-flex  select-client__item">
-                                    <div className="select-client__image">
-                                        <img src={user.image}/>
+                        return <li onClick={onSelectClient} key={index} value={user.ID}>
+                                <div className="d-flex  select-client__item" value={user.ID}>
+                                    <div className="select-client__image" value={user.ID}>
+                                        <img src={user.image} value={user.ID}/>
                                     </div>
-                                    <div className="select-client__name-job">
-                                        <p className="select-client__name">
+                                    <div className="select-client__name-job" value={user.ID}>
+                                        <p className="select-client__name" value={user.ID}>
                                             {user.display_name}
                                         </p>
-                                        <p className="select-client__company">
+                                        <p className="select-client__company" value={user.ID}>
                                             {user.company}
                                         </p>
                                     </div>
                                 </div>
-                            </button>
                             </li>
                  }) 
                 }
