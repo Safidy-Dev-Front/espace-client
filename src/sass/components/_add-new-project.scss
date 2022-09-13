@@ -12,6 +12,7 @@
     left: auto;
     right: -100%;
     transition: 0.4s;
+    overflow: auto;
     &.isShow{
         right: 0%;
     }
@@ -19,10 +20,33 @@
 .container__select-client{
     width: 100%;
     max-width: 384px;
+    position: relative;
 
 }
 .select-client__wrapper{
-    padding-left: 0;
+    padding-left: 7.5px;
+    padding-right: 7.5px;
+    padding-top: 0;
+    padding-bottom: 0;
+    width: 100%;
+    background-color: rgba($Gray, 0.1);
+    height: 0;
+    transition:height 0.4s;
+    overflow: hidden;
+    &.isShow{
+        padding-top: 7.5px;
+    padding-bottom: 7.5px;
+    height: 180px;
+    overflow-y: auto;
+    }
+    li{
+        padding: 7.5px;
+        margin-bottom: 4px;
+        border-radius: 4px;
+        &:hover{
+            background-color:rgba($Gray, 0.18) ;
+        }
+    }
 }
 .select-client__name-job{
     padding-left: 15px;
@@ -47,6 +71,7 @@
     justify-content: center;
     padding-left: 15px;
     border-radius: 4px;
+    cursor: pointer;
 }
 .select-client__name-job p{
     margin: 0;

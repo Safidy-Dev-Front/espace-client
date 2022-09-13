@@ -10844,6 +10844,7 @@ textarea.form-control-lg {
   left: auto;
   right: -100%;
   transition: 0.4s;
+  overflow: auto;
 }
 .container_add-new-project.isShow {
   right: 0%;
@@ -10852,10 +10853,33 @@ textarea.form-control-lg {
 .container__select-client {
   width: 100%;
   max-width: 384px;
+  position: relative;
 }
 
 .select-client__wrapper {
-  padding-left: 0;
+  padding-left: 7.5px;
+  padding-right: 7.5px;
+  padding-top: 0;
+  padding-bottom: 0;
+  width: 100%;
+  background-color: rgba(174, 174, 174, 0.1);
+  height: 0;
+  transition: height 0.4s;
+  overflow: hidden;
+}
+.select-client__wrapper.isShow {
+  padding-top: 7.5px;
+  padding-bottom: 7.5px;
+  height: 180px;
+  overflow-y: auto;
+}
+.select-client__wrapper li {
+  padding: 7.5px;
+  margin-bottom: 4px;
+  border-radius: 4px;
+}
+.select-client__wrapper li:hover {
+  background-color: rgba(174, 174, 174, 0.18);
 }
 
 .select-client__name-job {
@@ -10882,6 +10906,7 @@ textarea.form-control-lg {
   justify-content: center;
   padding-left: 15px;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .select-client__name-job p {
