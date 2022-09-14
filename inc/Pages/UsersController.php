@@ -12,9 +12,11 @@ class UsersController extends BaseController
 {   
     public $idAtt;
     public $users = [];
+    public $userSingle= [];
     public function register()
     {
         add_action('rest_api_init', [$this, 'apiGetUsers']);
+        add_action('rest_api_init', [$this, 'apiGetUserSingle']);
     }
     /**
      * @return Array
@@ -29,6 +31,22 @@ class UsersController extends BaseController
             [
                 'methods'   => 'GET',
                 'callback'  => [$this, 'getAllsUsers']
+            ]
+        );
+    }
+    /**
+     * @return void
+     * Get single users
+     */
+    public function apiGetUserSingle()
+    {
+        register_rest_route(
+            'api/v1',
+            'usersingle',
+            //'login/',
+            [
+                'methods'   => 'GET',
+                'callback'  => [$this, 'getSingleUser']
             ]
         );
     }
@@ -86,4 +104,32 @@ class UsersController extends BaseController
         }
         return $this->users;
     }
+    /**
+     * @return void
+     * get single user
+     */
+    public function getSingleUser(WP_REST_Request $request){
+        global $wpdb;
+        $id_u = $request['id_user'];
+        var_dump($id_u);
+        die;
+        $users = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "users WHERE ID={$id_u}");
+        foreach($users as $user){
+            $id_user = $user->ID;
+            $url_avatar = $this->getAttachment($id_user);
+            $company_object = get_field('company_of_user', 'user_'.$user->ID);
+            $company = $company_object->post_title;
+            $user_array = [
+                'ID'=>$user->ID,
+                'user_login'=>$user->user_login,
+                'user_email'=>$user->user_email,
+                'user_registered'=>$user->user_registered,
+                'display_name'=>$user->display_name,
+                'image'=> $url_avatar,
+                'company'=> $company
+            ];
+            array_push($this->userSingle, $user_array);
+        }
+        return $this->userSingle;
+    } 
 }

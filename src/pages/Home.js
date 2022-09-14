@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AddProject from "../components/buttons/addProject"
 import AddNewProject from "../components/Modales/addNewProject";
+import ItemProject from "../components/Templates/Projects/ItemProject";
 const Home = () => {
     const BASE_URL = window.location.origin;
     const [projects, setProjects] = useState([]);
@@ -31,14 +32,7 @@ const Home = () => {
                     <div className="row">
                         {
                             projects.map((project, index) => {
-                                return <div key={index} className="col-12 col-lg-4 col-md-6">
-                                    <div className="project-item">
-                                        <div className="project__container">
-                                            <h2>{project.name}</h2>
-                                            <p className="project__description">{project.descriptions}</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                return <ItemProject key={index} project={project}/>
                             })
                         }
                     </div>
