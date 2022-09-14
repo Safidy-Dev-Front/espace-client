@@ -118,12 +118,11 @@ class Api extends BaseController
                 'callback'  => function (WP_REST_Request $request) {
                     global $wpdb;
                     $date = new DateTime;
-                    $id_user = 1;   
                     $wpdb->insert('wp_projects', array(
                         "name"=>$request['name'],
-                        "descriptions"=>$request['descriptions'],
+                        "descriptions"=>$request['description'],
                         "created_at"=>$date->format(DateTime::ATOM),
-                        "id_user"=>$id_user
+                        "id_user"=>$request['id_user']
                         ),array( '%s', '%s', '%s', '%s'));
                 }
             ]

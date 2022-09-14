@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-const SelectUser = ()=>{
+const SelectUser = ({functionUser})=>{
     const BASE_URL = window.location.origin;
     //State users===============
     const [users, setUsers] = useState([]);
@@ -22,8 +22,8 @@ const SelectUser = ()=>{
     const onSelectClient = (id) =>{
         const user_selected = users.find((u)=>u.ID === id) 
         setUsersSelected(user_selected);
-        setClass_ul(false)    
-
+        setClass_ul(false)
+        functionUser(id)
     }
     return(
         <div className="container__select-client">

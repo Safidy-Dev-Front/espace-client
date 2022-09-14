@@ -10934,6 +10934,12 @@ textarea.form-control-lg {
   font-weight: 800;
 }
 
+.form-add-project__btn-add {
+  background-color: rgb(250, 168, 86);
+  color: #fff;
+  font-weight: 800;
+}
+
 .input-classic label {
   padding-bottom: 10px;
   font-size: 14px;
