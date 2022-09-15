@@ -2,3 +2,18 @@
     padding: 15px 25px;
     border-radius: 0;
 }
+.project__actions button{
+    border: none;
+    background-color: transparent;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    transition: 0.3s;
+    svg{
+        transform: translateY(-1.5px);
+    }
+    &:hover{
+    background-color: rgba($Primary,0.4);
+    
+    }
+}

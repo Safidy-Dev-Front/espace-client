@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { PencilSquare, Trash3 } from 'react-bootstrap-icons';
+
 const ItemProject = ({ project }) => {
     const BASE_URL = window.location.origin;
     //state=====================
     const [users, setUsers] = useState([]);
     const [sigleUser, setSingleUser] = useState({});
-    
+
     useEffect(() => {
-        const obj ={
-            id_user: project.id
-        }
-        console.log('id=', project.id);
-        axios.get(`${BASE_URL}/wp-json/api/v1/usersingle`,obj)
+        axios.get(`${BASE_URL}/wp-json/api/v1/users`)
             .then((response) => {
-                setUsers(response.data);
-                console.log('users===',response);
+                let users = response.data
+                let user = users.find((u) => u.ID === project.id)
+                setSingleUser(user);
+                console.log('users===', user);
             }).catch((error) => console.error(`Error:${error}`))
     }, []);
     // console.log('users===',users);
@@ -24,9 +24,28 @@ const ItemProject = ({ project }) => {
                 <div className="project__container">
                     <h2>{project.name}</h2>
                     <p className="project__description">{project.descriptions}</p>
-                </div>
-                <div className="project__footer">
-                    <div className="project__user">
+                    <div className="d-flex justify-content-between align-items-center project__footer">
+                        <div className="project__user">
+                            {
+                                sigleUser ?
+                                    <div className="project__user-image">
+                                        <img src={sigleUser.image} />
+                                    </div>
+                                    : null
+                            }
+                        </div>
+                        <div className="d-flex align-items-center project__actions">
+                            <div className="project__edit">
+                                <button>
+                                    <PencilSquare />
+                                </button>
+                            </div>
+                            <div className="project__delete">
+                                <button>
+                                    <Trash3 />
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

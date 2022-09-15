@@ -10767,6 +10767,21 @@ textarea.form-control-lg {
   border-radius: 0;
 }
 
+.project__actions button {
+  border: none;
+  background-color: transparent;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+.project__actions button svg {
+  transform: translateY(-1.5px);
+}
+.project__actions button:hover {
+  background-color: rgba(124, 124, 124, 0.4);
+}
+
 .app-navigation__main ul {
   padding-left: 0;
 }
@@ -10812,6 +10827,13 @@ textarea.form-control-lg {
   right: 30px;
   bottom: 30px;
   top: auto;
+}
+
+.project__user-image img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .add-project {
