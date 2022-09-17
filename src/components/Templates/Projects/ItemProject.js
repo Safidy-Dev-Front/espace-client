@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { PencilSquare, Trash3 } from 'react-bootstrap-icons';
+import { PencilSquare, Trash3, Eye } from 'react-bootstrap-icons';
 
 const ItemProject = ({ project }) => {
     const BASE_URL = window.location.origin;
@@ -35,6 +35,11 @@ const ItemProject = ({ project }) => {
                             }
                         </div>
                         <div className="d-flex align-items-center project__actions">
+                            <div className="project__edit">
+                                <button>
+                                    <Eye />
+                                </button>
+                            </div>
                             <div className="project__edit">
                                 <button>
                                     <PencilSquare />

@@ -3,6 +3,7 @@ import axios from "axios";
 import AddProject from "../components/buttons/addProject"
 import AddNewProject from "../components/Modales/addNewProject";
 import ItemProject from "../components/Templates/Projects/ItemProject";
+import EditProject from "../components/Modales/editProject";
 const Home = () => {
     const BASE_URL = window.location.origin;
     const [projects, setProjects] = useState([]);
@@ -40,6 +41,7 @@ const Home = () => {
                 <AddNewProject 
                 classNewProject={classNewProject} 
                 dismissFunction={closeAddProject}/>
+                <EditProject/>
                 <AddProject handleFunction={handleShowAddProject}/>
             </div>
         </div>

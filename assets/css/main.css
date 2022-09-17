@@ -10977,6 +10977,28 @@ textarea.form-control-lg {
   padding-bottom: 10px;
 }
 
+.edit-project {
+  display: block;
+  background-color: #fff;
+  padding: 40px;
+  position: absolute;
+  top: 80px;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: calc(100% - 40px);
+  max-width: 650px;
+  box-shadow: 0px 0px 38px 0px rgba(148, 148, 148, 0.4);
+  -webkit-box-shadow: 0px 0px 38px 0px rgba(148, 148, 148, 0.4);
+  -moz-box-shadow: 0px 0px 38px 0px rgba(148, 148, 148, 0.4);
+}
+
+.edit-project__field {
+  padding-bottom: 20px;
+}
+
 body {
   background: #f0f0f1;
 }
