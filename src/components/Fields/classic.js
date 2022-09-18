@@ -1,5 +1,5 @@
 import React from "react";
-const Classic = ({ funcionProps, type, placeholder, idInput , label}) => {
+const Classic = ({ funcionProps, type, placeholder, idInput , label, defaultValue}) => {
     return (
         <div className="input-classic">
             <label htmlFor={idInput}>{label}</label>
@@ -8,6 +8,7 @@ const Classic = ({ funcionProps, type, placeholder, idInput , label}) => {
                 onChange={funcionProps}
                 placeholder={placeholder}
                 className="form-control"
+                value={defaultValue}
             />
         </div>
     )

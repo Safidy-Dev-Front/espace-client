@@ -8,14 +8,15 @@ const Home = () => {
     const BASE_URL = window.location.origin;
     const [projects, setProjects] = useState([]);
     //State  User Interface ==========
-    const [showAddProject, setShowAddProject] = useState(false);
+    const [projectEdited, setprojectEdited] = useState([]);
     const [classNewProject, setClassNewProject] = useState('container_add-new-project')
+    const [editProjectWhere, setEditProjectWhere] = useState(false)
     //Function: action User===============
-    const handleShowAddProject = (e)=>{
+    const handleShowAddProject = (e) => {
         e.preventDefault();
         setClassNewProject('container_add-new-project isShow')
     }
-    const closeAddProject = (e)=>{
+    const closeAddProject = (e) => {
         e.preventDefault();
         setClassNewProject('container_add-new-project')
     }
@@ -23,9 +24,15 @@ const Home = () => {
         axios.get(`${BASE_URL}/wp-json/project/v1/projects`)
             .then((response) => {
                 setProjects(response.data)
+
             }).catch((error) => console.error(`Error:${error}`))
     }, []);
-    console.log('Projects =>', projects);
+    const handleEditProject = (idProject) => {
+        const projetSet = projects.find((p) => p.id === idProject);
+        setprojectEdited(projetSet)
+        console.log('projectset', projetSet);
+        setEditProjectWhere(true);
+    }
     return (
         <div id="home-page">
             <div className="container-home">
@@ -33,16 +40,23 @@ const Home = () => {
                     <div className="row">
                         {
                             projects.map((project, index) => {
-                                return <ItemProject key={index} project={project}/>
+                                return <ItemProject
+                                    key={index} project={project}
+                                    functionEdit={handleEditProject}
+                                />
                             })
                         }
                     </div>
                 </div>
-                <AddNewProject 
-                classNewProject={classNewProject} 
-                dismissFunction={closeAddProject}/>
-                <EditProject/>
-                <AddProject handleFunction={handleShowAddProject}/>
+                <AddNewProject
+                    classNewProject={classNewProject}
+                    dismissFunction={closeAddProject} />
+                {
+                    editProjectWhere ?
+                        <EditProject project={projectEdited} />
+                        : null
+                }
+                <AddProject handleFunction={handleShowAddProject} />
             </div>
         </div>
     )

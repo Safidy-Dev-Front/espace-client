@@ -28,6 +28,7 @@ class Api extends BaseController
         add_action('init', [$this, 'AddArgPostType']);
         add_action('rest_api_init', [$this, 'customApiAddProject']);
         add_action('rest_api_init', [$this, 'customApiGetProject']);
+        add_action('rest_api_init', [$this, 'customApiSetProject']);
         $this->settings->addPages($this->pages)->register();
     }
     public function addPostType()
@@ -153,6 +154,25 @@ class Api extends BaseController
      */
     public function customApiSetProject()
     {
+        register_rest_route(
+            'project/v1',
+            'setproject',
+            [
+                'methods'   => 'PUT',
+                'callback'  => function (WP_REST_Request $request) {
+                    global $wpdb;
+                    $response = $wpdb->update($wpdb->prefix."projects",
+                                    array(
+                                        'name'          => $request['name'], 
+                                        'descriptions'  => $request['description'],
+                                        'id_user'       => $request['user'] 
+                                    ),
+                                    array('id'=>$request['ID'])
+                                );
+                    return $response;
+                }
+            ]
+        );
     }
 
 }

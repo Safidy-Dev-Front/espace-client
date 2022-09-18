@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-const SelectUser = ({functionUser})=>{
+const SelectUser = ({functionUser, idUserEdit})=>{
     const BASE_URL = window.location.origin;
     //State users===============
     const [users, setUsers] = useState([]);
@@ -14,17 +14,18 @@ const SelectUser = ({functionUser})=>{
         axios.get(`${BASE_URL}/wp-json/api/v1/users`)
             .then((response) => {
                 setUsers(response.data)
-            }).catch((error) => console.error(`Error:${error}`))
+            }).catch((error) => console.error(`Error:${error}`));
     }, []);
     const onToggleClient = ()=>{
         setClass_ul(!class_ul)    
     }
     const onSelectClient = (id) =>{
-        const user_selected = users.find((u)=>u.ID === id) 
+        const user_selected = idUserEdit ? idUserEdit : users.find((u)=>u.ID === id) 
         setUsersSelected(user_selected);
         setClass_ul(false)
         functionUser(id)
     }
+    
     return(
         <div className="container__select-client">
             <div className="select-client__selected" onClick={onToggleClient}>
@@ -47,6 +48,7 @@ const SelectUser = ({functionUser})=>{
                     <div className="select-client__text">
                         <p>Sélectioné un client</p>
                     </div>
+                    
                 }
             </div>
             <ul ref={client_wrapper} className={class_ul?"select-client__wrapper isShow": "select-client__wrapper"}>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { PencilSquare, Trash3, Eye } from 'react-bootstrap-icons';
 
-const ItemProject = ({ project }) => {
+const ItemProject = ({ project , functionEdit}) => {
     const BASE_URL = window.location.origin;
     //state=====================
     const [users, setUsers] = useState([]);
@@ -14,7 +14,6 @@ const ItemProject = ({ project }) => {
                 let users = response.data
                 let user = users.find((u) => u.ID === project.id)
                 setSingleUser(user);
-                console.log('users===', user);
             }).catch((error) => console.error(`Error:${error}`))
     }, []);
     // console.log('users===',users);
@@ -41,7 +40,7 @@ const ItemProject = ({ project }) => {
                                 </button>
                             </div>
                             <div className="project__edit">
-                                <button>
+                                <button onClick={()=>functionEdit(project.id)}>
                                     <PencilSquare />
                                 </button>
                             </div>
