@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { PencilSquare, Trash3, Eye } from 'react-bootstrap-icons';
 
-const ItemProject = ({ project , functionEdit}) => {
+const ItemProject = ({ project , functionEdit, functionDelete}) => {
     const BASE_URL = window.location.origin;
     //state=====================
-    const [users, setUsers] = useState([]);
-    const [sigleUser, setSingleUser] = useState({});
+    const [companies, setCompanies] = useState([]);
+    const [sigleCompany, setSingleCompany] = useState({});
 
     useEffect(() => {
-        axios.get(`${BASE_URL}/wp-json/api/v1/users`)
+        axios.get(`${BASE_URL}/wp-json/wp/v2/company`)
             .then((response) => {
-                let users = response.data
-                let user = users.find((u) => u.ID === project.id)
-                setSingleUser(user);
+                let companies = response.data
+                let company = companies.find((u) => u.ID === project.id_company)
+                setSingleCompany(company);
             }).catch((error) => console.error(`Error:${error}`))
     }, []);
     // console.log('users===',users);
@@ -26,9 +26,9 @@ const ItemProject = ({ project , functionEdit}) => {
                     <div className="d-flex justify-content-between align-items-center project__footer">
                         <div className="project__user">
                             {
-                                sigleUser ?
+                                sigleCompany ?
                                     <div className="project__user-image">
-                                        <img src={sigleUser.image} />
+                                        <img src={sigleCompany.image} />
                                     </div>
                                     : null
                             }
@@ -45,7 +45,7 @@ const ItemProject = ({ project , functionEdit}) => {
                                 </button>
                             </div>
                             <div className="project__delete">
-                                <button>
+                                <button onClick={()=>functionDelete(project.id)}>
                                     <Trash3 />
                                 </button>
                             </div>

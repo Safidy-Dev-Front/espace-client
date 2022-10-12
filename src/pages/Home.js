@@ -11,7 +11,7 @@ const Home = () => {
     const [projectEdited, setprojectEdited] = useState([]);
     const [classNewProject, setClassNewProject] = useState('container_add-new-project')
     const [editProjectWhere, setEditProjectWhere] = useState(false)
-    //Function: action User===============
+    //Function: action User==============
     const handleShowAddProject = (e) => {
         e.preventDefault();
         setClassNewProject('container_add-new-project isShow')
@@ -20,18 +20,30 @@ const Home = () => {
         e.preventDefault();
         setClassNewProject('container_add-new-project')
     }
-    useEffect(() => {
+    const getProjects = ()=>{
         axios.get(`${BASE_URL}/wp-json/project/v1/projects`)
-            .then((response) => {
-                setProjects(response.data)
-
-            }).catch((error) => console.error(`Error:${error}`))
-    }, []);
+        .then((response) => {
+            setProjects(response.data)
+        }).catch((error) => console.error(`Error:${error}`))
+    }
+    useEffect(() => {
+        getProjects();
+        const getProject = setInterval(()=>{
+        getProjects();
+        }, 1000)
+        return () => clearInterval(getProject)
+    },[]);
     const handleEditProject = (idProject) => {
         const projetSet = projects.find((p) => p.id === idProject);
         setprojectEdited(projetSet)
         console.log('projectset', projetSet);
         setEditProjectWhere(true);
+    }
+    const handleDeleteProject=(idProject)=>{
+        axios.delete(`${BASE_URL}/wp-json/project/v1/deleteproject`, { data:{id_project:idProject}})
+        .then((response) => {
+            console.log('idProject=>', idProject);
+        }).catch((error) => console.error(`Error:${error}`))
     }
     return (
         <div id="home-page">
@@ -43,6 +55,7 @@ const Home = () => {
                                 return <ItemProject
                                     key={index} project={project}
                                     functionEdit={handleEditProject}
+                                    functionDelete={handleDeleteProject}
                                 />
                             })
                         }
@@ -53,7 +66,9 @@ const Home = () => {
                     dismissFunction={closeAddProject} />
                 {
                     editProjectWhere ?
-                        <EditProject project={projectEdited} />
+                        <EditProject project={projectEdited} handleClose={() => {
+                            setEditProjectWhere(false)
+                        }} />
                         : null
                 }
                 <AddProject handleFunction={handleShowAddProject} />

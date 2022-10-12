@@ -3,11 +3,11 @@ import axios from "axios";
 import Classic from "../Fields/classic";
 import Textarea from "../Fields/textarea";
 import SelectUser from "../Customs/SelectUser";
-const EditProject = ({project}) => {
+const EditProject = ({project, handleClose}) => {
     const BASE_URL = window.location.origin;
     const [name, setName] = useState(project.name);
     const [descriptions, setDescriptions] = useState(project.descriptions);
-    const [userId, setUserId] = useState();
+    const [userId, setUserId] = useState(project.id_user);
 
     const handleChangeName = (e) => {
         let value = e.target.value
@@ -27,11 +27,12 @@ const EditProject = ({project}) => {
         axios.put(`${BASE_URL}/wp-json/project/v1/setproject`, {
             name:name,
             description: descriptions,
-            user: 1,
+            user: userId,
             ID:project.id
         }).then((response)=>{
             console.log('ready');
             console.log(response);
+            handleClose();
         }).catch((error)=>console.error(error))
     }
     return (
@@ -64,6 +65,9 @@ const EditProject = ({project}) => {
                         </div>
                         <div className="edit-project__field">
                             <input type="submit" className="btn form-add-project__btn-add" value="Enregistrer" />
+                        </div>
+                        <div className="edit-project__field">
+                            <button onClick={handleClose} className="btn">Annuler</button>
                         </div>
                     </form>
                 </div>

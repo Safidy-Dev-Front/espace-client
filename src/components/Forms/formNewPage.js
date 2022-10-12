@@ -22,13 +22,15 @@ const FormNewPage = ()=>{
     const handleUserId=(idUser)=>{
         console.log(idUser);
         setUserId(idUser);
+
     }
     const onSubmitProject = (e) =>{
         e.preventDefault()
         const projet = {
             name:name,
             description:description,
-            id_user:userId
+            id_user:userId,
+            id_company: userId
         }
         axios.post(`${BASE_URL}/wp-json/project/v1/projectadd`,projet)
         .then(response =>{

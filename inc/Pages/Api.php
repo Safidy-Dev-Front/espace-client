@@ -29,6 +29,7 @@ class Api extends BaseController
         add_action('rest_api_init', [$this, 'customApiAddProject']);
         add_action('rest_api_init', [$this, 'customApiGetProject']);
         add_action('rest_api_init', [$this, 'customApiSetProject']);
+        add_action('rest_api_init', [$this, 'customApiDeleteProject']);
         $this->settings->addPages($this->pages)->register();
     }
     public function addPostType()
@@ -123,8 +124,9 @@ class Api extends BaseController
                         "name"=>$request['name'],
                         "descriptions"=>$request['description'],
                         "created_at"=>$date->format(DateTime::ATOM),
-                        "id_user"=>$request['id_user']
-                        ),array( '%s', '%s', '%s', '%s'));
+                        "id_user"=>$request['id_user'],
+                        "id_company"=>$request['id_company']
+                        ),array( '%s', '%s', '%s', '%s', '%s'));
                 }
             ]
         );
@@ -169,6 +171,25 @@ class Api extends BaseController
                                     ),
                                     array('id'=>$request['ID'])
                                 );
+                    return $response;
+                }
+            ]
+        );
+    }
+  /**
+     * @return void
+     * custom api delete Projects
+     */
+    public function customApiDeleteProject()
+    {
+        register_rest_route(
+            'project/v1',
+            'deleteproject',
+            [
+                'methods'   => 'DELETE',
+                'callback'  => function (WP_REST_Request $request) {
+                    global $wpdb;
+                    $response = $wpdb->delete( $wpdb->prefix."projects", array( 'id' => $request['id_project']) );
                     return $response;
                 }
             ]

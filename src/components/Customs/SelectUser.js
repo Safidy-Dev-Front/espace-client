@@ -3,25 +3,25 @@ import axios from "axios";
 const SelectUser = ({functionUser, idUserEdit})=>{
     const BASE_URL = window.location.origin;
     //State users===============
-    const [users, setUsers] = useState([]);
-    const [usersSelected, setUsersSelected ] = useState({});
+    const [companies, setCompanies] = useState([]);
+    const [companySelected, setCompanySelected ] = useState({});
     //Class ====================
     const [class_ul, setClass_ul] = useState(false);
 
     //Ref=======================
     const client_wrapper = useRef(null)
     useEffect(() => {
-        axios.get(`${BASE_URL}/wp-json/api/v1/users`)
+        axios.get(`${BASE_URL}/wp-json/wp/v2/company`)
             .then((response) => {
-                setUsers(response.data)
+                setCompanies(response.data)
             }).catch((error) => console.error(`Error:${error}`));
     }, []);
     const onToggleClient = ()=>{
         setClass_ul(!class_ul)    
     }
     const onSelectClient = (id) =>{
-        const user_selected = idUserEdit ? idUserEdit : users.find((u)=>u.ID === id) 
-        setUsersSelected(user_selected);
+        const company_selected = idUserEdit ? idUserEdit : companies.find((comp)=>comp.id === id) 
+        setCompanySelected(company_selected);
         setClass_ul(false)
         functionUser(id)
     }
@@ -30,41 +30,35 @@ const SelectUser = ({functionUser, idUserEdit})=>{
         <div className="container__select-client">
             <div className="select-client__selected" onClick={onToggleClient}>
                 {
-                    usersSelected.display_name ? 
+                    companySelected.title ? 
                     <div className="client_selected_item d-flex align-items-center">
                          <div className="client_selected_image">
-                            <img src={usersSelected.image}/>
+                            <img src={companySelected.acf.logo_company}/>
                          </div>
                         <div className="select-client__name-job">
                             <p className="select-client__name">
-                                {usersSelected.display_name}
-                            </p>
-                            <p className="select-client__company">
-                                {usersSelected.company}
+                                {companySelected.title.rendered}
                             </p>
                         </div>
                     </div>
                     :
                     <div className="select-client__text">
-                        <p>Sélectioné un client</p>
+                        <p>Sélectioné un Entreprise</p>
                     </div>
                     
                 }
             </div>
             <ul ref={client_wrapper} className={class_ul?"select-client__wrapper isShow": "select-client__wrapper"}>
                 {
-                 users.map((user, index)=>{
-                        return <li onClick={()=>onSelectClient(user.ID)} key={index} >
+                 companies.map((company, index)=>{
+                        return <li onClick={()=>onSelectClient(company.id)} key={index} >
                                 <div className="d-flex  select-client__item" >
                                     <div className="select-client__image" >
-                                        <img src={user.image} />
+                                        <img src={company.acf.logo_company} />
                                     </div>
                                     <div className="select-client__name-job" >
                                         <p className="select-client__name" >
-                                            {user.display_name}
-                                        </p>
-                                        <p className="select-client__company" >
-                                            {user.company}
+                                            {company.title.rendered}
                                         </p>
                                     </div>
                                 </div>
