@@ -12,7 +12,7 @@ class UsersController extends BaseController
 {   
     public $idAtt;
     public $users = [];
-    public $userSingle= [];
+    public $userSingle=[];
     public function register()
     {
         add_action('rest_api_init', [$this, 'apiGetUsers']);
@@ -110,26 +110,22 @@ class UsersController extends BaseController
      */
     public function getSingleUser(WP_REST_Request $request){
         global $wpdb;
-        $id_u = $request['id_user'];
-        var_dump($id_u);
-        die;
-        $users = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "users WHERE ID={$id_u}");
-        foreach($users as $user){
-            $id_user = $user->ID;
+        $id_u = intval($request['id_user']);
+        $user = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "users WHERE ID=$id_u");
+            $id_user = $user[0]->ID;
             $url_avatar = $this->getAttachment($id_user);
-            $company_object = get_field('company_of_user', 'user_'.$user->ID);
+            $company_object = get_field('company_of_user', 'user_'.$user[0]->ID);
             $company = $company_object->post_title;
             $user_array = [
-                'ID'=>$user->ID,
-                'user_login'=>$user->user_login,
-                'user_email'=>$user->user_email,
-                'user_registered'=>$user->user_registered,
-                'display_name'=>$user->display_name,
+                'ID'=>$user[0]->ID,
+                'user_login'=>$user[0]->user_login,
+                'user_email'=>$user[0]->user_email,
+                'user_registered'=>$user[0]->user_registered,
+                'display_name'=>$user[0]->display_name,
                 'image'=> $url_avatar,
                 'company'=> $company
             ];
             array_push($this->userSingle, $user_array);
-        }
-        return $this->userSingle;
+        return $this->userSingle; 
     } 
 }
