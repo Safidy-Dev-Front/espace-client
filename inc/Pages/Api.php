@@ -61,7 +61,7 @@ class Api extends BaseController
         register_post_type('support', $args_support);
 
         $labels_company = array(
-            'name' => 'Enptreprise',
+            'name' => 'Entreprise',
             'singular_name' => 'Enptreprise'
         );
 

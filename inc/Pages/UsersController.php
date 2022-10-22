@@ -91,6 +91,7 @@ class UsersController extends BaseController
             $url_avatar = $this->getAttachment($id_user);
             $company_object = get_field('company_of_user', 'user_'.$user->ID);
             $company = $company_object->post_title;
+            $company_id = $company_object->ID;
             $user_array = [
                 'ID'=>$user->ID,
                 'user_login'=>$user->user_login,
@@ -98,6 +99,7 @@ class UsersController extends BaseController
                 'user_registered'=>$user->user_registered,
                 'display_name'=>$user->display_name,
                 'image'=> $url_avatar,
+                'company_id'=>$company_id,
                 'company'=> $company
             ];
             array_push($this->users, $user_array);
