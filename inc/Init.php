@@ -16,6 +16,7 @@ final class Init
 			Pages\Admin::class,
 			Pages\Api::class,
 			Pages\UsersController::class,
+			Pages\SupportController::class,
 			Base\Enqueue::class,
 			Base\SettingsLinks::class
 		];

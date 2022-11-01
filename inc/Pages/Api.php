@@ -8,7 +8,7 @@ use Inc\Base\BaseController;
 use Inc\Api\Callbacks\AdminCallbacks;
 use Inc\Api\Callbacks\ManagerCallbacks;
 use \WP_REST_Request;
-
+use \WP_Query;
 /**
  * 
  */
@@ -23,7 +23,11 @@ class Api extends BaseController
         $this->settings = new SettingsApi();
         $this->callbacks = new AdminCallbacks();
         $this->setPages();
-
+    
+     
+        
+        // var_dump($support);
+        // die;
         add_filter('jwt_auth_token_before_dispatch', [$this, 'jwtAuthFunction'], 10, 2);
         add_action('init', [$this, 'AddArgPostType']);
         add_action('rest_api_init', [$this, 'customApiAddProject']);

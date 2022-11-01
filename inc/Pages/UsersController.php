@@ -87,20 +87,20 @@ class UsersController extends BaseController
         global $wpdb;
         $usersArray = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "users");
          foreach($usersArray as $user){
-            $id_user = $user->ID;
-            $url_avatar = $this->getAttachment($id_user);
+            $id_user        = $user->ID;
+            $url_avatar     = $this->getAttachment($id_user);
             $company_object = get_field('company_of_user', 'user_'.$user->ID);
-            $company = $company_object->post_title;
-            $company_id = $company_object->ID;
-            $user_array = [
-                'ID'=>$user->ID,
-                'user_login'=>$user->user_login,
-                'user_email'=>$user->user_email,
+            $company        = $company_object->post_title;
+            $company_id     = $company_object->ID;
+            $user_array     = [
+                'ID'             =>$user->ID,
+                'user_login'     =>$user->user_login,
+                'user_email'     =>$user->user_email,
                 'user_registered'=>$user->user_registered,
-                'display_name'=>$user->display_name,
-                'image'=> $url_avatar,
-                'company_id'=>$company_id,
-                'company'=> $company
+                'display_name'   =>$user->display_name,
+                'image'          => $url_avatar,
+                'company_id'     =>$company_id,
+                'company'        => $company
             ];
             array_push($this->users, $user_array);
         }
@@ -114,18 +114,21 @@ class UsersController extends BaseController
         global $wpdb;
         $id_u = intval($request['id_user']);
         $user = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "users WHERE ID=$id_u");
-            $id_user = $user[0]->ID;
-            $url_avatar = $this->getAttachment($id_user);
+            $id_user        = $user[0]->ID;
+            $url_avatar     = $this->getAttachment($id_user);
             $company_object = get_field('company_of_user', 'user_'.$user[0]->ID);
-            $company = $company_object->post_title;
+            $company        = $company_object->post_title;
+            $company_id     = $company_object->ID;
+
             $user_array = [
-                'ID'=>$user[0]->ID,
-                'user_login'=>$user[0]->user_login,
-                'user_email'=>$user[0]->user_email,
+                'ID'             =>$user[0]->ID,
+                'user_login'     =>$user[0]->user_login,
+                'user_email'     =>$user[0]->user_email,
                 'user_registered'=>$user[0]->user_registered,
-                'display_name'=>$user[0]->display_name,
-                'image'=> $url_avatar,
-                'company'=> $company
+                'display_name'   =>$user[0]->display_name,
+                'image'          => $url_avatar,
+                'company'        => $company,
+                'company_id'     =>$company_id
             ];
             array_push($this->userSingle, $user_array);
         return $this->userSingle; 
