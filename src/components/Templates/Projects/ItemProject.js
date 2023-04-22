@@ -16,7 +16,7 @@ const ItemProject = ({ project , functionEdit, functionDelete}) => {
                 setSingleCompany(company);
             }).catch((error) => console.error(`Error:${error}`))
     }, []);
-    // console.log('users===',users);
+    console.log('companie==>',sigleCompany);
     return (
         <div className="col-12 col-lg-4 col-md-6">
             <div className="project-item">

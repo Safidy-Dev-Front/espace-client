@@ -71,11 +71,9 @@ class UsersController extends BaseController
     {
         $ID_post = $this->idAttachment($user_id);
         global $wpdb;
-
         $attachment = $wpdb->get_results("SELECT * FROM " 
         .$wpdb->prefix."posts WHERE ID={$ID_post}");
         $url_att = $attachment[0]->guid;
-
         return $url_att;
     }
     /**
@@ -93,13 +91,13 @@ class UsersController extends BaseController
             $company        = $company_object->post_title;
             $company_id     = $company_object->ID;
             $user_array     = [
-                'ID'             =>$user->ID,
-                'user_login'     =>$user->user_login,
-                'user_email'     =>$user->user_email,
-                'user_registered'=>$user->user_registered,
-                'display_name'   =>$user->display_name,
+                'ID'             => $user->ID,
+                'user_login'     => $user->user_login,
+                'user_email'     => $user->user_email,
+                'user_registered'=> $user->user_registered,
+                'display_name'   => $user->display_name,
                 'image'          => $url_avatar,
-                'company_id'     =>$company_id,
+                'company_id'     => $company_id,
                 'company'        => $company
             ];
             array_push($this->users, $user_array);
@@ -121,14 +119,14 @@ class UsersController extends BaseController
             $company_id     = $company_object->ID;
 
             $user_array = [
-                'ID'             =>$user[0]->ID,
-                'user_login'     =>$user[0]->user_login,
-                'user_email'     =>$user[0]->user_email,
-                'user_registered'=>$user[0]->user_registered,
-                'display_name'   =>$user[0]->display_name,
+                'ID'             => $user[0]->ID,
+                'user_login'     => $user[0]->user_login,
+                'user_email'     => $user[0]->user_email,
+                'user_registered'=> $user[0]->user_registered,
+                'display_name'   => $user[0]->display_name,
                 'image'          => $url_avatar,
                 'company'        => $company,
-                'company_id'     =>$company_id
+                'company_id'     => $company_id
             ];
             array_push($this->userSingle, $user_array);
         return $this->userSingle; 
